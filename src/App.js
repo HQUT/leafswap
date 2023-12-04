@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter , Route, Routes} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+import { SearchPresenter } from './Presenter/searchPresenter';
+import { DetailsPresenter } from './Presenter/detailsPresenter';
+import { HomePresenter } from './Presenter/homePresenter';
+import { About } from './views/About';
+ import Model from './js/Model';
+const model = new Model(); 
+function App(props) {
+ return (
+    <BrowserRouter> 
+  
+         <Routes>
+					
+
+          <Route path="/about" element={<About model={props.model} />}/>
+          <Route path="/search" element={<SearchPresenter model={props.model} />}/>
+          <Route path="/details" element={<DetailsPresenter model={props.model} />}/>
+          <Route index path='*' element={<SearchPresenter model={props.model} />} />
+      
+        </Routes>
+     
+    </BrowserRouter>
+
   );
 }
 
