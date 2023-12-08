@@ -1,0 +1,107 @@
+
+body {
+    font-family: 'Lora';
+}
+
+.imageContainer {
+    height: 10px;
+    width: 10px;
+}
+
+
+
+.changePicButton {
+    display: block;
+    border-radius: 5px;
+    width: 100px;
+    height: 35px;
+    margin-top: 10px;
+    margin-left: 25%;
+    margin-right: 75%;
+    background-color: #CECECE;
+    border: none;
+    font-size: 12px;
+  }
+
+.changePicButton:hover {
+    background-color: #a6a6a6;
+    border: none;
+}
+
+.pictureContainer {
+    margin-top: 20px;
+    margin-left: 30px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 100px;
+    width: 250px;
+    height: 250px;
+    float: left;
+    display: l;
+}
+
+.popup {
+    height: 280px;
+    width: 600px;
+    background-color: rgb(238, 238, 238);
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+    padding-bottom: 100px;
+    position: absolute;
+  }
+  
+  .popupPic {
+    margin: 10px;
+    float: left;
+    width: 120px;
+    height: 120px;
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+  
+  .exitPopup {
+    border: none;
+    border-radius: 3px;
+    background-color: #c5c5c5;
+    width: 30px;
+    height: 30px;
+    margin-top: 2%;
+  }
+  @media (min-width: 768px) {
+    .pictureContainer {
+      /* Uppdatera layouten för större enheter om det behövs */
+      flex-direction: row; /* Exempel: Ändra till rad-layout */
+      justify-content: center;
+    }
+  
+    .image {
+      /* Anpassa bildstorleken om det behövs */
+      max-width: 100px;
+      border-radius: 50%;
+    }
+  
+    .changePicButton {
+      margin-left: 60px; /* Anpassa marginalen för knappen */
+    }
+}
+    .image {
+        max-width: 80px; /* Standardstorlek för bilden */
+        height: auto; /* Behåll proportionerna */
+        border-radius: 50%;
+        /* Andra grundläggande stilar om nödvändigt */
+      }
+    
+      @media (max-width: 992px) {
+        .image {
+          margin-top: 60px;
+          max-width: 120px;
+          height: auto; 
+          border-radius: 50%; 
+        }
+        .changePicButton {
+            margin-left: 260px; 
+            margin-top: 180px;
+          }
+      }
+    

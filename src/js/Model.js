@@ -13,6 +13,19 @@ class Model {
     this.setCurrentBook(currentBook);
   }
 
+  updateUserProfile({ name, email, phone, avatar, occupation }) {
+    if (this.user) {
+      this.user.name = name;
+      this.user.email = email;
+      this.user.phone = phone;
+      this.user.avatar = avatar;
+      this.user.occupation = occupation;
+      
+      this.saveUserProfileToFirebase(); 
+      this.notifyObservers();
+    }
+  }
+
   loadBooksFromLocalStorage() {
     const savedBooks = localStorage.getItem("books");
     if (savedBooks) {
