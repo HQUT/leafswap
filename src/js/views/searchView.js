@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 function SearchFormView(props) {
   return (
     <div>
@@ -23,39 +23,39 @@ function SearchFormView(props) {
 
 function SearchResultsView(props) {
   const navigate = useNavigate();
+  const { bookChosen, searchResults } = props;
+
+  const handleBookClick = (id) => {
+    if (bookChosen) {
+      bookChosen(id);
+      navigate("/details");
+    }
+  };
 
   return (
     <div className="search-container">
-      {props.searchResults !== null
-        ? props.searchResults.map(function (book) {
-            return (
-              <div
-                className="book-card"
-                key={book.id}
-                onClick={(e) => {
-                  props.bookChosen(book.id);
-                  navigate("/details");
-                }}
-              >
-               <img
-  src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'defaultThumbnailUrl'}
-  alt={book.volumeInfo.title}
-  onClick={(e) => {
-    navigate("/details");
-    props.bookChosen(book.id);
-  }}
-/>
-
-                <div className="book-card-info">
-                  <p>{book.volumeInfo.categories}</p>
-                  <p>{book.volumeInfo.title}</p>
-                </div>
-              </div>
-            );
-          })
-        : ""}
+      <Link to="/" className="home-button">Home</Link>
+      {searchResults && searchResults.length > 0 ? (
+        searchResults.map((book) => (
+          <div className="book-card" key={book.id} onClick={() => handleBookClick(book.id)}>
+            <img
+              src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'defaultThumbnailUrl'}
+              alt={book.volumeInfo.title}
+            />
+            <div className="book-card-info">
+              <p>{book.volumeInfo.categories}</p>
+              <p>{book.volumeInfo.title}</p>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>Inga resultat hittades</p>
+      )}
     </div>
   );
 }
+
+
+
 
 export { SearchFormView, SearchResultsView };
