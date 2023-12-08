@@ -14,7 +14,7 @@ Leafswap is the pinterest of books. This app aims to let users search for books 
 - Persistence of data to Firebase
 
 ## File Structure
-´´´
+```
 .
 ├── .firebase
 ├── dist/                               # for firebase deployment
@@ -52,4 +52,4 @@ Leafswap is the pinterest of books. This app aims to let users search for books 
 │   ├── slick-theme.css
 │   └── slick.css
 └── README.md
-´´´
+```
