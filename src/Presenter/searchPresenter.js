@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { usePromise } from "../js/usePromise.js";
 import { promiseNoData } from "../js/promiseNoData.js";
 import { SearchFormView, SearchResultsView } from "../views/searchView.js";
-import { searchBooksByName } from "../js/bookSource"; // Använd rätt import
+import { BookSource } from "../js/bookSource.js";
 import { categories } from "../data";
 
 export function SearchPresenter(props) {
@@ -14,7 +14,7 @@ export function SearchPresenter(props) {
 
   const searchBook = () => {
     if (query && categor)
-      setPromise(searchBooksByName(query)); // Använd den rätta funktionen
+      setPromise(BookSource.searchBookByCategory(query, categor));
     else return;
   };
 
@@ -29,10 +29,9 @@ export function SearchPresenter(props) {
       {promiseNoData(myPromise, myData, myError) || (
         <SearchResultsView
           searchResults={myData}
-          bookChosen={(id) => props.model.setCurrentBook(id)}
+          bookChosen={props.model ? (id) => props.model.setCurrentBook(id) : null}
         />
       )}
     </div>
   );
 }
-

@@ -7,7 +7,12 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background: hsl(0, 0%, 100%);
+  background-image: url("https://wallpapercave.com/wp/wp6244547.jpg") !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+  min-height: 100vh; 
 }
 
 /*  Search View */
@@ -215,7 +220,7 @@ select {
   color: #f1e7e7;
   font-size: 18px;
   border: none;
-  background-color: rgba(11, 71, 175, 0.75);
+  background-color: rgba(23, 60, 124, 0.75);
   margin-top: 80px;
   padding: 12px 0;
   border-radius: 25px;
@@ -327,6 +332,28 @@ span {
   padding: 0.45rem 0.8rem;
   display: inline-block;
   text-decoration: none;
+  
+  
+}
+.home-button{
+  
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background: transparent;
+    border-radius: 0.4rem;
+    display: inline-block;
+    letter-spacing: 0.15rem;
+    border: 2px solid #04288a;
+    color: #043e57;
+    transition: all 0.3s linear;
+    text-transform: uppercase;
+    padding: 0.45rem 0.8rem;
+    display: inline-block;
+    text-decoration: none;
+    position: fixed; 
+    bottom: 40px; 
+    right: 50px; 
 }
 
 .btn:hover {
@@ -390,11 +417,6 @@ h2 {
   padding: 20px;
 }
 
-@media screen and (min-width: 992px) {
-  .section {
-    width: 95vw;
-  }
-}
 
 
 
@@ -464,3 +486,44 @@ h1 {
   font-size: 5rem;
   cursor: pointer;
 }
+/* SidebarComp.css */
+.sidebar {
+  background-color: #f8f9fa;
+  border-right: 1px solid #ddd;
+  width: 100px;
+}
+
+
+.custom-logo {
+  max-width: 110px; 
+  height: 100px; 
+  margin-left: 110px;
+  margin-top: 80px;
+  margin-bottom: -30px;
+}
+
+
+.sidebar-title {
+  font-family: 'Times New Roman', sans-serif; 
+  font-size: 50px; 
+  color: #dfdb09; 
+  display: flex;
+  margin-left: 60px;
+  margin-top: 10px;
+ 
+}
+
+
+
+@media screen and (min-width: 992px) {
+  .section {
+    width: 95vw;
+  }
+  .sidebar-title{
+    text-align: justify;
+  }
+  .custom-logo{
+    margin-bottom: -30px;
+  }
+}
+/* Lägg till ytterligare CSS efter behov */

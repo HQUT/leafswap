@@ -2,14 +2,14 @@ import React from "react";
 import Slider from "react-slick";
 import "../slick.css";
 import "../slick-theme.css";
+import { useNavigate } from "react-router-dom"; // Importera useNavigate
 
 export function HomeResultsView(props) {
-  const { searchResults, bookChosen, settings } = props;
+  const { searchResults, settings } = props;
+  const navigate = useNavigate(); // Skapa en instans av useNavigate
 
   const navigateToDetails = (id) => {
-    bookChosen(id);
-    // Du kan även navigera till detaljsidan här om du har React Router implementerat
-    // Exempel: history.push("/details");
+    navigate(`/details/${id}`); // Navigera till detaljsidan med bokens ID
   };
 
   return (
@@ -17,13 +17,13 @@ export function HomeResultsView(props) {
       <Slider {...settings}>
         {searchResults !== null &&
           searchResults.map((book) => (
-            <div key={book.id}>
+            <div key={book.id} onClick={() => navigateToDetails(book.id)} className="home-book-card">
               <img
                 src={book.volumeInfo.imageLinks.thumbnail}
-                onClick={() => navigateToDetails(book.id)}
-                alt=""
+                alt={book.volumeInfo.title}
                 className="home-book"
               />
+              {/* Du kan lägga till ytterligare bokinformation här om du vill */}
             </div>
           ))}
       </Slider>

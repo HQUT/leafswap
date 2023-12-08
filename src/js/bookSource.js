@@ -1,55 +1,44 @@
 import { API_KEY } from "./apiConfig";
 
-async function apiCall(endpoint) {
-    const url = `https://www.googleapis.com/books/v1/${endpoint}&key=${API_KEY}`;
-    try {
-        const response = await fetch(url);
+const BASE_URL = "https://www.googleapis.com/books/v1";
 
-        if (!response.ok) {
-            throw new Error(`Network response not ok: ${response.status} - ${response.statusText}`);
-        }
-
-        return await response.json();
-    } catch (error) {
+const BookSource = {
+  apiCall(endpoint) {
+    const url = `${BASE_URL}/${endpoint}&key=${API_KEY}`;
+    return fetch(url)
+      .then(response => {
+        if (response.ok) return response.json();
+        throw new Error(`Network response not ok: ${response.status} - ${response.statusText}`);
+      })
+      .catch(error => {
         console.error('Error during API call:', error);
         throw error;
-    }
-}
+      });
+  },
 
-async function searchBooksByName(bookName) {
+  searchBooksByName(bookName) {
     if (!bookName) {
-        throw new Error('Book name is required for the search');
+      throw new Error('Book name is required for the search');
     }
     const formattedBookName = encodeURIComponent(bookName);
-    return apiCall(`volumes?q=${formattedBookName}`);
-}
+    return this.apiCall(`volumes?q=${formattedBookName}`);
+  },
 
-async function searchBookByCategory(category, params = '') {
+  searchBookByCategory(category, params = '') {
     if (!category) {
-        throw new Error('Category is required for the search');
+      throw new Error('Category is required for the search');
     }
     const formattedCategory = encodeURIComponent(category);
     const formattedParams = params ? `&${params}` : '';
-    return apiCall(`volumes?q=subject:${formattedCategory}${formattedParams}`);
-}
+    return this.apiCall(`volumes?q=subject:${formattedCategory}${formattedParams}`);
+  },
 
-async function getBookDetails(id) {
+  getBookDetails(id) {
     if (!id) {
-        throw new Error('Book ID is required to fetch details');
+      throw new Error('Book ID is required to fetch details');
     }
-    return apiCall(`volumes/${id}`);
-}
+    return this.apiCall(`volumes/${id}`);
+  }
+};
 
-async function fetchBookDetails(id) {
-   try {
-       const bookDetails = await getBookDetails(id);
-       this.currentBookDetails = bookDetails;
-       this.notifyObservers();
-   } catch (error) {
-       console.error('Error fetching book details:', error);
-       this.currentBookError = error;
-       this.notifyObservers();
-   }
-}
-
-export { fetchBookDetails, searchBooksByName, searchBookByCategory, getBookDetails };
+export { BookSource };

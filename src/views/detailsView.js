@@ -1,43 +1,136 @@
-import React, { useState, useEffect } from 'react';
-import { getBookDetails } from '../js/bookSource'; // Replace with the actual path to your API module
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import LinesEllipsis from "react-lines-ellipsis";
+import Stars from "react-stars-display";
 
-function DetailView({ bookId }) {
-    const [bookDetails, setBookDetails] = useState(null);
-    const [error, setError] = useState('');
+export function DetailsView(props) {
+  const navigate = useNavigate();
+  const info = props.book.volumeInfo;
 
-    useEffect(() => {
-        if (bookId) {
-            getBookDetails(bookId)
-                .then(details => {
-                    setBookDetails(details);
-                })
-                .catch(err => {
-                    setError(`Error fetching details: ${err.message}`);
-                });
-        }
-    }, [bookId]);
+  return (
+    <section className="book-section">
+      <div className="details-book">
+        <div>
+          {/* Visa bilden om den finns, annars ingenting */}
+          {info.imageLinks && (
+            <img src={info.imageLinks.thumbnail} alt={info.title} />
+          )}
 
-    if (error) {
-        return <div>{error}</div>;
-    }
-
-    if (!bookDetails) {
-        return <div>Loading...</div>;
-    }
-
-    return (
-        <div className="book-details">
-            <h2>{bookDetails.volumeInfo.title}</h2>
-            {/* Display other details like authors, description, etc. */}
-            {bookDetails.volumeInfo.authors && (
-                <p>Authors: {bookDetails.volumeInfo.authors.join(', ')}</p>
-            )}
-            {bookDetails.volumeInfo.description && <p>{bookDetails.volumeInfo.description}</p>}
-            {bookDetails.volumeInfo.imageLinks && bookDetails.volumeInfo.imageLinks.thumbnail && (
-                <img src={bookDetails.volumeInfo.imageLinks.thumbnail} alt={`Cover of ${bookDetails.volumeInfo.title}`} />
-            )}
+          <div>
+            {props.isBookInList === undefined ? (
+              <button
+                className="btn"
+                onClick={() => {
+                  props.login && props.bookAdded(props.book);
+                  !props.login && navigate("/login");
+                }}
+              >
+                Add to list!
+              </button>
+            ) : null}
+          </div>
         </div>
-    );
-}
 
-export default DetailView;
+        <div className="book-info">
+          <div>
+            <span>title: </span>
+            {info.title}
+            {info.subtitle && <span>: {info.subtitle}</span>}
+          </div>
+
+          {info.language && (
+            <div>
+              <span>language: </span>
+              {info.language === "en" ? "English" : info.language}
+            </div>
+          )}
+
+          {info.authors && (
+            <div>
+              <span>
+                author<span style={{ textTransform: "lowercase" }}>(s)</span>:{" "}
+              </span>
+              <ul>
+                {info.authors.map((author, index) => (
+                  <li key={index}>{author}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {info.industryIdentifiers && (
+            <div>
+              <span>ISBN: </span>
+              {info.industryIdentifiers.map((identifier, index) => (
+                <span key={index}>{identifier.identifier}{index < info.industryIdentifiers.length - 1 ? ', ' : ''}</span>
+              ))}
+            </div>
+          )}
+
+          {info.categories && (
+            <div>
+              <span>
+                genre<span style={{ textTransform: "none" }}>(s)</span>:{" "}
+              </span>
+              <ul>
+                {info.categories.map((cat, index) => (
+                  <li key={index}>{cat}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {info.description && (
+            <div>
+              <span>description: </span>
+              <div style={{ textTransform: "none", display: "inline" }}>
+                <LinesEllipsis
+                  text={info.description.replace(/<(.|\n)*?>/g, "")}
+                  maxLine={`${props.readMore ? "100" : "3"}`}
+                  ellipsis="..."
+                  trimRight
+                  basedOn="letters"
+                />
+              </div>
+              <button
+                className="btn read-more"
+                type="button"
+                onClick={() => props.setReadMore()}
+              >
+                {props.readMore ? "read less" : "read more"}
+              </button>
+            </div>
+          )}
+
+          {info.publisher && (
+            <div>
+              <span>publisher: </span>
+              {info.publisher}
+            </div>
+          )}
+
+          {info.publishedDate && (
+            <div>
+              <span>publication date: </span>
+              {info.publishedDate}
+            </div>
+          )}
+
+          {info.averageRating !== undefined && (
+            <div>
+              <span>Customer Reviews: </span>
+              <Stars stars={info.ratingsCount} size={20} />
+            </div>
+          )}
+
+          {info.pageCount && (
+            <div>
+              <span>no page: </span>
+              {info.pageCount} pages
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
