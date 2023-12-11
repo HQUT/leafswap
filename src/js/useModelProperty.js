@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export function useModelProperty(model, propertyName) {
-  if (!model || typeof propertyName !== "string" || !model.hasOwnProperty(propertyName)) {
+  if (!model || typeof propertyName !== "string" || !(propertyName in model)) {
     throw new Error("Invalid model or propertyName");
   }
 
@@ -13,10 +13,13 @@ export function useModelProperty(model, propertyName) {
     }
     model.addObserver(obs);
 
+    // Uppdatera värdet direkt om model eller propertyName ändras
+    setValue(model[propertyName]);
+
     return function () {
       model.removeObserver(obs);
     };
-  }, [model, propertyName]);
+  }, [model, propertyName]); // Beroenden till useEffect
 
   return value;
 }

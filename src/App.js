@@ -27,7 +27,7 @@ function App(props) {
               <Route path="/login" element={<LoginPresenter setIsLoggedIn={setIsLoggedIn} />} />
               <Route path="/about" element={<About model={props.model} />} />
               <Route path="/search" element={<SearchPresenter model={props.model} />} />
-              <Route path="/details/:id" element={<DetailsPresenter model={props.model} />} />
+              <Route path="/details" element={<DetailsPresenter model={props.model} />} />
               <Route index path="*" element={<HomePresenter model={props.model} />} />
             </Routes>
           </div>
