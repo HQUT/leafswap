@@ -1,10 +1,13 @@
-import { API_KEY } from "./apiConfig";
+import { API_KEY , BASE_URL} from "./apiConfig";
 
-const BASE_URL = "https://www.googleapis.com/books/v1";
+const info = new URLSearchParams({
+  key: API_KEY 
+}).toString();
 
 const BookSource = {
   apiCall(endpoint) {
-    const url = `${BASE_URL}/${endpoint}&key=${API_KEY}`;
+    const url = `${BASE_URL}/${endpoint}&${info}`; 
+    console.log("API Request URL:", url); // Använd info-strängen här
     return fetch(url)
       .then(response => {
         if (response.ok) return response.json();
@@ -16,12 +19,9 @@ const BookSource = {
       });
   },
 
-  searchBooksByName(bookName) {
-    if (!bookName) {
-      throw new Error('Book name is required for the search');
-    }
-    const formattedBookName = encodeURIComponent(bookName);
-    return this.apiCall(`volumes?q=${formattedBookName}`);
+  searchBook(params) {
+    const formattedParams = encodeURIComponent(params);
+    return this.apiCall(`volumes?q=${formattedParams}`);
   },
 
   searchBookByCategory(category, params = '') {
@@ -29,15 +29,28 @@ const BookSource = {
       throw new Error('Category is required for the search');
     }
     const formattedCategory = encodeURIComponent(category);
-    const formattedParams = params ? `&${params}` : '';
-    return this.apiCall(`volumes?q=subject:${formattedCategory}${formattedParams}`);
+    const formattedParams = params ? encodeURIComponent(params) : '';
+    return this.apiCall(`volumes?q=subject:${formattedCategory}${formattedParams ? `+${formattedParams}` : ''}`);
   },
 
   getBookDetails(id) {
-    if (!id) {
-      throw new Error('Book ID is required to fetch details');
-    }
-    return this.apiCall(`volumes/${id}`);
+    //return this.apiCall(`volumes/${id}`);
+    const url = `${BASE_URL}/volumes/${id}?${info}`;
+    console.log(`API Request URL (GET):`, url);
+    
+    return fetch(url, {
+      method: "GET",
+    })
+      .then((response) => {
+        if (response.ok) return response.json();
+        throw new Error(
+          `Network response not ok: ${response.status} - ${response.statusText}`
+        );
+      })
+      .catch((error) => {
+        console.error('Error during API call:', error);
+        throw error;
+      });
   }
 };
 
