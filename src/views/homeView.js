@@ -13,7 +13,7 @@ export function HomeResultsView(props) {
           searchResults.map((book) => (
             <div
               key={book.id}
-              onClick={() => bookChosen(book.id)}// Använd bokChosen direkt här
+              onClick={() => bookChosen(book.id)}
               className="home-book-card"
             >
               <img
