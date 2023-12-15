@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 function SearchFormView(props) {
   return (
     <div>
@@ -23,39 +24,37 @@ function SearchFormView(props) {
 
 function SearchResultsView(props) {
   const navigate = useNavigate();
-  const { bookChosen, searchResults } = props;
-
-  const handleBookClick = (id) => {
-    if (bookChosen) {
-      bookChosen(id);
-      navigate("/details");
-    }
-  };
 
   return (
     <div className="search-container">
-      <Link to="/" className="home-button">Home</Link>
-      {searchResults && searchResults.length > 0 ? (
-        searchResults.map((book) => (
-          <div className="book-card" key={book.id} onClick={() => handleBookClick(book.id)}>
-            <img
-              src={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : 'defaultThumbnailUrl'}
-              alt={book.volumeInfo.title}
-            />
-            <div className="book-card-info">
-              <p>{book.volumeInfo.categories}</p>
-              <p>{book.volumeInfo.title}</p>
-            </div>
+       <Link to="/" className="home-button">Home</Link>
+      {props.searchResults !== null
+  ? props.searchResults.map(function (book) {
+      const thumbnail = book.volumeInfo.imageLinks?.thumbnail || 'defaultThumbnailUrl';
+      return (
+        <div
+        className="book-card"
+        key={book.id}
+        onClick={() => {
+          props.bookChosen(book.id);
+          navigate("/details");
+        }}
+      >
+          <img
+            src={thumbnail}
+            alt={book.volumeInfo.title}
+          />
+          <div className="book-card-info">
+            <p>{book.volumeInfo.categories}</p>
+            <p>{book.volumeInfo.title}</p>
           </div>
-        ))
-      ) : (
-        <p>Inga resultat hittades</p>
-      )}
+        </div>
+      );
+    })
+  : ""}
+
     </div>
   );
 }
-
-
-
 
 export { SearchFormView, SearchResultsView };

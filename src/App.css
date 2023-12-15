@@ -70,44 +70,6 @@ select {
   }
 }
 
-/* navbar */
-
-.navbar {
-  background: #088fe3a5;
-  padding: 0.5% 0.5%;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  text-decoration: none;
-}
-
-.navbar img {
-  width: 80px;
-  height: 80px;
-}
-
-.nav-links {
-  align-self: center;
-  list-style-type: none;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  text-align: center;
-}
-
-.link {
-  transition: 0.3s ease-in-out;
-  color: rgb(255, 255, 255);
-  text-transform: capitalize;
-  text-decoration: none;
-  font-size: 1.4 rem;
-}
-
-.link:hover {
-  color: rgba(187, 55, 66, 0.782);
-}
-
-.active {
-  color: #0a0101e7;
-}
 
 /*  login  */
 
@@ -260,6 +222,7 @@ select {
 }
 .details-book img {
   border-radius: 0.25rem;
+  size: 20px;
 }
 
 .details-book p,
@@ -282,8 +245,9 @@ ul {
   margin-right: 0.5rem;
   vertical-align: top;
   padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  color: rgb(146, 105, 2);
+  border-radius: 4rem;
+  font-size: 18px;
+  color: rgb(14, 42, 219);
 }
 
 .average-rating {
@@ -313,20 +277,20 @@ ul {
 .book-section,
 span {
   vertical-align: top;
-  color: #070000;
+  color: #090000;
 }
 
 /* Button */
 .btn {
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 4px;
   font-weight: 600;
   background: transparent;
   border-radius: 0.4rem;
   display: inline-block;
   letter-spacing: 0.15rem;
-  border: 2px solid #2e9cca;
-  color: #2e9cca;
+  border: 2px solid #8B4513; 
+  color: #043e57;
   transition: all 0.3s linear;
   text-transform: uppercase;
   padding: 0.45rem 0.8rem;
@@ -357,13 +321,26 @@ span {
 }
 
 .btn:hover {
-  color: #fff;
-  background: #2e9cca;
+  color: #081482;
+  background: #116082;
 }
 
 .read-more {
   margin: 5px;
   display: block;
+  cursor: pointer;
+  font-size: 4px;
+  font-weight: 600;
+  background: transparent;
+  border-radius: 0.4rem;
+  display: inline-block;
+  letter-spacing: 0.15rem;
+  border: 2px solid #8B4513; 
+  color: #043e57;
+  transition: all 0.3s linear;
+  text-transform: uppercase;
+  padding: 0.45rem 0.8rem;
+  text-decoration: none;
 }
 
 /* list */
@@ -527,3 +504,55 @@ h1 {
   }
 }
 /* Lägg till ytterligare CSS efter behov */
+
+.gradient-custom {
+  /* fallback for old browsers */
+  
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+}
+
+gradient-custom .edit-icon {
+  color: rgb(233, 11, 11); 
+  font-size: 10rem; 
+  cursor: pointer; /* Ändrar muspekaren till en pekare när den hovrar över ikonen */
+  margin-bottom: 0.5rem; /* Justera marginalen efter behov */
+}
+
+/* Du kan även lägga till hover-effekter om du vill */
+.gradient-custom .edit-icon:hover {
+  color: #ddd; /* Exempel: ändra färg när muspekaren hovrar över */
+}
+
+.profile-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 992px) {
+  
+  /* Egenskaper för gradient, om nödvändigt */
+  .gradient-custom {
+    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+  }
+}
+
+.popup1 {
+  position: fixed; 
+  top: 0; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  background-color: green;
+  color: black;
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); 
+  z-index: 1000; 
+  text-align: center; 
+}

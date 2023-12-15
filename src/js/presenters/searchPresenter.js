@@ -1,20 +1,34 @@
-import React, { useState } from "react";
-import { usePromise } from "../js/usePromise.js";
-import { promiseNoData } from "../js/promiseNoData.js";
+import React, { useState, useEffect } from "react";
+import { usePromise, promiseNoData } from "../js/Promise.js";
 import { SearchFormView, SearchResultsView } from "../views/searchView.js";
 import { BookSource } from "../js/bookSource.js";
-import { categories } from "../data";
+
 
 export function SearchPresenter(props) {
   const [myPromise, setPromise] = useState(null);
   const [query, setQuery] = useState("");
-  const [categor, setCategor] = useState("");
+  const [category, setCategory] = useState("");
 
   const [myData, myError] = usePromise(myPromise);
 
+  const categories = ["Fiction", "Fantasy", "Roman","Family & Relationships", 
+ "Cooking", "Political", "Sci-fi","Philosophy"];
+
+ useEffect(() => {
+  doSearch();
+}, []);
+
+const doSearch = () => {
+  const searchQuery = "Popular";
+  const popularCategory = "New"; 
+  setPromise(BookSource.searchBookByCategory(searchQuery, popularCategory));
+};
+
+  
+
   const searchBook = () => {
-    if (query && categor)
-      setPromise(BookSource.searchBookByCategory(query, categor));
+    if (query && category)
+      setPromise(BookSource.searchBookByCategory(query, category));
     else return;
   };
 
@@ -23,13 +37,13 @@ export function SearchPresenter(props) {
       <SearchFormView
         options={categories}
         onText={(text) => setQuery(text)}
-        onCategor={(categor) => setCategor(categor)}
+        onCategor={(categories) => setCategory(categories)}
         onSearch={searchBook}
       />
       {promiseNoData(myPromise, myData, myError) || (
         <SearchResultsView
           searchResults={myData}
-          bookChosen={props.model ? (id) => props.model.setCurrentBook(id) : null}
+          bookChosen={(id) => props.model?.setCurrentBook(id)}
         />
       )}
     </div>

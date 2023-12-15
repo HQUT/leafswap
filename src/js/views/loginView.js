@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
 export function LoginView(props) {
     let a = "login-section login";
     let b = "login-section signup";
+
     return (
       <div className={props.signIn ? a : b}>
-         <Link to="/" className="home-button">
-        Home
-      </Link>
+        
+         {props.showResetPopup && (
+          <div className="popup1">
+            <p>Ett e-postmeddelande för återställning av lösenordet har skickats.</p>
+
+          </div>
+        )}
         <form
           className="login-container"
           onSubmit={(e) => e.preventDefault()}
@@ -39,6 +43,7 @@ export function LoginView(props) {
           >
             REGISTER
           </button>
+
           <button
             className="login-button"
             hidden={!props.signIn}
@@ -46,8 +51,22 @@ export function LoginView(props) {
           >
             LOGIN
           </button>
+          <button
+           className="login-button"
+           hidden={!props.signIn}
+           onClick={(e) => props.onForgotPassword()}
+          >
+            Forgot password?
+           </button>
+
+        
         </form>
+        <button
+          className="home-button"
+          onClick={() => props.onNavigateHome()}
+        >
+          Home
+        </button>
       </div>
     );
-  }
-  
+}
