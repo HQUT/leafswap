@@ -1,5 +1,6 @@
 import { API_KEY , BASE_URL} from "./apiConfig";
 
+
 const info = new URLSearchParams({
   key: API_KEY 
 }).toString();
