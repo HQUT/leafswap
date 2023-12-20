@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { LoginView } from '../views/loginView';
-import * as firebase from 'firebase/app';
 import { 
     getAuth,
     createUserWithEmailAndPassword,
@@ -8,8 +7,9 @@ import {
     signOut,
     sendPasswordResetEmail
 } from 'firebase/auth';
-import { useNavigate, useLocation } from 'react-router-dom'; 
-import app from '../firebaseConfig.js';
+import { useNavigate } from 'react-router-dom'; 
+import { app } from '../firebaseConfig';
+import { useLocation } from 'react-router-dom';
 
 export function LoginPresenter({ setIsLoggedIn }) {
     const [email, setEmail] = useState('');
