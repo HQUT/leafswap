@@ -19,7 +19,8 @@ const BookSource = {
         throw error;
       });
   },
-
+  
+  
   searchBook(params) {
     const formattedParams = encodeURIComponent(params);
     return this.apiCall(`volumes?q=${formattedParams}`);

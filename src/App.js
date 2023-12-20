@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { SearchPresenter } from './Presenter/searchPresenter';
 import { DetailsPresenter } from './Presenter/detailsPresenter';

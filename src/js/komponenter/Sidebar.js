@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Sidebar } from 'flowbite-react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 import {
   HiArrowSmLeft,
   HiArrowSmRight,
@@ -52,16 +53,23 @@ function SidebarComp({ isLoggedIn, setIsLoggedIn }) {
   const handleAboutusCick = () =>{
     navigate('/about');
   };
-
+  
+  const handleHomeClick =() =>{
+    navigate('/');
+  };
   return (
     <Sidebar aria-label="Sidebar with logo branding example">
       <Sidebar.Logo href="#">
+      <div onClick={handleHomeClick} style={{ cursor: 'pointer' }}>
         <img
           className="custom-logo"
           src="https://clipground.com/images/book-logo-png-12.png"
           alt="Leafswap logo"
         />
-        <span className="sidebar-title">Leafswap</span>
+        <span className="sidebar-title">Leafswap
+        </span>
+        </div>
+       
       </Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
