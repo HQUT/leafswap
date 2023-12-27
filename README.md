@@ -12,10 +12,11 @@ Leafswap is the pinterest of books. This app aims to let users search for books 
 - BookDetails
 - Proper routing of the whole sidebar
 - Collections
-
-## What's left to do
 - Persistence of data to Firebase small fix
 
+
+## What's left to do
+EVERYTHING SEEMS TO BE DONE !!
 ## File Structure
 ```
 .
