@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useModelProperty } from '../js/useModelProperty';
-import BookCollectionView from '../views/bookCollectionView';
+import BookCollectionView from '../views/bookCollection';
 import '../App.css';
 
 export function BookCollectionPresenter(props) {
