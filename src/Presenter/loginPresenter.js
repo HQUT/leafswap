@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { app } from '../firebaseConfig';
 import { useLocation } from 'react-router-dom';
 
+
 export function LoginPresenter({ setIsLoggedIn }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,12 +22,12 @@ export function LoginPresenter({ setIsLoggedIn }) {
     const navigate = useNavigate();
 
     const location = useLocation();
-  const fromPage = new URLSearchParams(location.search).get('redirect');
+    const fromPage = new URLSearchParams(location.search).get('redirect');
 
     const handleLogin = async () => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            setIsLoggedIn(true); // Uppdatera inloggningsstatus
+            setIsLoggedIn(true); 
             navigate(fromPage ||'/');
         } catch (error) {
             setErrorText(error.message);
@@ -36,7 +37,7 @@ export function LoginPresenter({ setIsLoggedIn }) {
     const handleRegistration = async () => {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
-            setIsLoggedIn(true); // Uppdatera inloggningsstatus
+            setIsLoggedIn(true); 
             navigate('/profile');
         } catch (error) {
             setErrorText(error.message);
@@ -55,15 +56,15 @@ export function LoginPresenter({ setIsLoggedIn }) {
 
     const handleForgotPassword = async () => {
         if (!email) {
-            setErrorText("Vänligen ange en e-postadress.");
+            setErrorText("Please enter an email address.");
             return;
         }
         try {
             await sendPasswordResetEmail(auth, email);
             setShowResetPopup(true);
-            setTimeout(() => setShowResetPopup(false), 8000); // Stäng popup efter 20 sekunder
+            setTimeout(() => setShowResetPopup(false), 8000); 
         } catch (error) {
-            setErrorText("Kunde inte skicka återställningsmejl: " + error.message);
+            setErrorText("Could not send reset email. " + error.message);
         }
     };
 

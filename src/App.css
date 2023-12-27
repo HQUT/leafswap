@@ -41,7 +41,7 @@ select {
   cursor: pointer;
   display: grid;
   transition: 0.2s ease-in-out;
-  background-color: rgb(168, 222, 246);
+  background-color: #f4f1f1;
   border-radius: 8px;
 }
 
@@ -54,6 +54,7 @@ select {
 
 .book-card:hover {
   transform: scale(1.16);
+  background-color: #e0e0e0; 
 }
 
 .book-card-info p {
@@ -216,9 +217,14 @@ select {
 }
 
 .details-book {
+  margin-top: 15px;
   width: 85vw;
   max-width: 1170px;
   margin: 0 auto;
+  background-color: #f4f1f1; 
+  margin-top: 20px;
+  
+ 
 }
 .details-book img {
   border-radius: 0.25rem;
@@ -237,6 +243,7 @@ div {
 ul {
   list-style-type: none;
   display: inline-block;
+  
 }
 
 .details-book .book-info {
@@ -259,6 +266,10 @@ ul {
     display: grid;
     grid-template-columns: 2fr 4fr;
     gap: 1rem;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    margin-top: 100px;
   }
 
   .details-book img {
@@ -288,7 +299,6 @@ span {
   background: transparent;
   border-radius: 0.4rem;
   display: inline-block;
-  letter-spacing: 0.15rem;
   border: 2px solid #8B4513; 
   color: #043e57;
   transition: all 0.3s linear;
@@ -296,6 +306,7 @@ span {
   padding: 0.45rem 0.8rem;
   display: inline-block;
   text-decoration: none;
+  
   
   
 }
@@ -309,7 +320,7 @@ span {
     display: inline-block;
     letter-spacing: 0.15rem;
     border: 2px solid #04288a;
-    color: #043e57;
+    color: #0c2e3c;
     transition: all 0.3s linear;
     text-transform: uppercase;
     padding: 0.45rem 0.8rem;
@@ -346,7 +357,7 @@ span {
 /* list */
 
 .list {
-  background: rgb(168, 222, 246);
+  background: rgb(150, 167, 234);
   display: flex;
   justify-content: space-between;
   max-width: 600px;
@@ -355,15 +366,15 @@ span {
   border-radius: 0.25rem;
 }
 .list img {
-  height: 13%;
-  width: 13%;
+  height: 30%;
+  width:30%;
 }
 
 .list button,
 .list a {
   background: transparent;
   border-color: transparent;
-  color: hsl(297, 67%, 47%);
+  color: hsl(64, 66%, 30%);
   letter-spacing: 0.1rem;
   cursor: pointer;
 }
@@ -400,6 +411,7 @@ h2 {
 /** home  **/
 
 .container {
+  margin-top: 35px;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -417,6 +429,7 @@ h2 {
 .home-book:hover {
   filter: grayscale(100%);
   transform: scale(1.1);
+  
 }
 /* about css*/
 .picture
@@ -431,26 +444,28 @@ h2 {
     padding-top: 5px;
     font-size: 25;
     margin-bottom: 40px;
+    background-color: #f4f1f1;;
 }
 .about{
     text-align: left;
+   
 }
 .about
 {
     padding-top: 40px;
+    
 }
 
 .about {
-  font-size: 40px;
-  text-transform: uppercase;
-  font-family: 'Work Sans', sans-serif;
-  letter-spacing: -3px;
+  font-family: 'Times New Roman', sans-serif; 
+  font-size: 50px; 
+  color: #dfdb09; 
   transition: 700ms ease;
   font-variation-settings: "wght" 311;
   margin-bottom: 0.8rem;
-  color: rgb(120, 4, 97);
   outline: none;
   text-align: left;
+ 
 }
 
 .about:hover {
@@ -468,8 +483,20 @@ h1 {
   background-color: #f8f9fa;
   border-right: 1px solid #ddd;
   width: 100px;
+  text-decoration: none;
 }
 
+.sidebar-slogan {
+  font-size: 18px; 
+  font-family: 'Times New Roman', sans-serif; 
+  font-weight: bold; 
+  font-style: italic;
+  color: #acaa06; 
+  margin-top: -2px;
+  text-decoration: none; 
+  display: table-cell;
+ text-align: center;
+}
 
 .custom-logo {
   max-width: 110px; 
@@ -487,6 +514,7 @@ h1 {
   display: flex;
   margin-left: 60px;
   margin-top: 10px;
+  flex-direction: column;
  
 }
 
@@ -503,29 +531,22 @@ h1 {
     margin-bottom: -30px;
   }
 }
-/* Lägg till ytterligare CSS efter behov */
+
 
 .gradient-custom {
-  /* fallback for old browsers */
-  
-
-  /* Chrome 10-25, Safari 5.1-6 */
   background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
 }
 
 gradient-custom .edit-icon {
   color: rgb(233, 11, 11); 
   font-size: 10rem; 
-  cursor: pointer; /* Ändrar muspekaren till en pekare när den hovrar över ikonen */
-  margin-bottom: 0.5rem; /* Justera marginalen efter behov */
+  cursor: pointer; 
+  margin-bottom: 0.5rem; 
 }
 
-/* Du kan även lägga till hover-effekter om du vill */
 .gradient-custom .edit-icon:hover {
-  color: #ddd; /* Exempel: ändra färg när muspekaren hovrar över */
+  color: #ddd; 
 }
 
 .profile-col {
@@ -536,8 +557,6 @@ gradient-custom .edit-icon {
 }
 
 @media (min-width: 992px) {
-  
-  /* Egenskaper för gradient, om nödvändigt */
   .gradient-custom {
     background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
   }
@@ -555,4 +574,62 @@ gradient-custom .edit-icon {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); 
   z-index: 1000; 
   text-align: center; 
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px;
+  padding: 10px;
+}
+
+.collection-box {
+  border: 1px solid #053ab6;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  background-color: #f4f1f1; 
+}
+
+.collection-box h3 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  font-family: 'Times New Roman', sans-serif; 
+  font-weight: bold; 
+  font-style: normal;
+  color: #acaa06; 
+}
+
+.collection-box:hover {
+  transform: scale(1.05);
+  background-color: #e0e0e0; 
+}
+
+.collection-box img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* profileprovider*/
+.profileprovider-info {
+  position: absolute;
+  top: 10px; 
+  right: 10px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px; 
+}
+.profileprovider-img{
+  width: 50px; 
+  height: 50px; 
+  border-radius: 50%;
+  margin-bottom: 4px; 
+}
+.profileprovider-name{
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
