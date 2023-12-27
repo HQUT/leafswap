@@ -13,13 +13,12 @@ export function useModelProperty(model, propertyName) {
     }
     model.addObserver(obs);
 
-    // Uppdatera värdet direkt om model eller propertyName ändras
     setValue(model[propertyName]);
 
     return function () {
       model.removeObserver(obs);
     };
-  }, [model, propertyName]); // Beroenden till useEffect
+  }, [model, propertyName]); 
 
   return value;
 }

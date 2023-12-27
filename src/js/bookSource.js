@@ -1,5 +1,6 @@
 import { API_KEY , BASE_URL} from "./apiConfig";
 
+
 const info = new URLSearchParams({
   key: API_KEY 
 }).toString();
@@ -7,7 +8,7 @@ const info = new URLSearchParams({
 const BookSource = {
   apiCall(endpoint) {
     const url = `${BASE_URL}/${endpoint}&${info}`; 
-    console.log("API Request URL:", url); // Använd info-strängen här
+    console.log("API Request URL:", url); 
     return fetch(url)
       .then(response => {
         if (response.ok) return response.json();
@@ -18,7 +19,8 @@ const BookSource = {
         throw error;
       });
   },
-
+  
+  
   searchBook(params) {
     const formattedParams = encodeURIComponent(params);
     return this.apiCall(`volumes?q=${formattedParams}`);
@@ -34,7 +36,6 @@ const BookSource = {
   },
 
   getBookDetails(id) {
-    //return this.apiCall(`volumes/${id}`);
     const url = `${BASE_URL}/volumes/${id}?${info}`;
     console.log(`API Request URL (GET):`, url);
     

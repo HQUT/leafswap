@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 export function usePromise(promise) {
-  // Custom hook
+  
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
