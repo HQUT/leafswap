@@ -10,26 +10,26 @@ export function DetailsView(props) {
 
   return (
     <section className="book-section">
-       <Link to="/" className="home-button">Home</Link>
+      <Link to="/" className="home-button">Home</Link>
       {info ? (
         <div className="details-book">
           <div>
-            {info.imageLinks && (
-              <img src={info.imageLinks.thumbnail} alt={info.title} />
-            )}
+          {info&& info.imageLinks && info.imageLinks.thumbnail && (
+                  <img src={info.imageLinks.thumbnail} alt={info.title} />
+                )}
+          </div>
 
-            <div>
-              {props.isBookInList === undefined ? (
-                <button
-                  className="btn"
-                  onClick={() => {
-                    props.login ? props.bookAdded(props.book) : navigate("/login");
-                  }}
-                >
-                  Add to Collection
-                </button>
-              ) : null}
-            </div>
+          <div>
+            {props.isBookInList === undefined ? (
+              <button
+                className="btn"
+                onClick={() => {
+                  props.login ? props.showAddToCollectionPopup() : navigate("/login");
+                }}
+              >
+                Add to Collection
+              </button>
+            ) : null}
           </div>
 
           <div className="book-info">
@@ -48,7 +48,7 @@ export function DetailsView(props) {
 
             {info.authors && (
               <div>
-                <span>author(s): </span>
+                <span>Author(s): </span>
                 <ul>
                   {info.authors.map((author, index) => (
                     <li key={index}>{author}</li>
@@ -68,7 +68,7 @@ export function DetailsView(props) {
 
             {info.categories && (
               <div>
-                <span>genre(s): </span>
+                <span>Genre(s): </span>
                 <ul>
                   {info.categories.map((category, index) => (
                     <li key={index}>{category}</li>
@@ -79,7 +79,7 @@ export function DetailsView(props) {
 
             {info.description && (
               <div>
-                <span>description: </span>
+                <span>Description: </span>
                 <LinesEllipsis
                   text={info.description.replace(/<(.|\n)*?>/g, "")}
                   maxLine={props.readMore ? "100" : "3"}
@@ -99,7 +99,7 @@ export function DetailsView(props) {
 
             {info.publisher && (
               <div>
-                <span>publisher: </span>
+                <span>Publisher: </span>
                 {info.publisher}
               </div>
             )}
@@ -113,7 +113,7 @@ export function DetailsView(props) {
 
             {info.pageCount && (
               <div>
-                <span>page count: </span>
+                <span>Page count: </span>
                 {info.pageCount} pages
               </div>
             )}

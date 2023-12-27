@@ -1,24 +1,96 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography } from 'mdb-react-ui-kit';
 import { MDBInput } from 'mdb-react-ui-kit';
 import ProfilePicture from './picture';
-
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDatabase, ref, update, onValue } from "firebase/database";
+import { app } from '../../firebaseConfig';
+import { useProfile } from './ProfileContext';
 
 export default function PersonalProfile() {
-
-  console.log("Rendering PersonalProfile");
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState('Marie Horwitz');
+  const [user, setUser] = useState(null);
+  const [name, setName] = useState('');
   const [occupation, setOccupation] = useState('Web Designer');
-  const [email, setEmail] = useState('info@example.com');
-  const [phone, setPhone] = useState('+46 ** *** ** **');
-  const [profilePic, setProfilePic] = useState('https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [profilePic, setProfilePic] = useState('');
+  const { profileData, updateProfileData } = useProfile(); 
+  const auth = getAuth();
+
+  useEffect(() => {
+    console.log('Aktuell profildata från Context:', profileData);
+    setName(profileData.name);
+    setEmail(profileData.email);
+    setPhone(profileData.phone);
+    setOccupation(profileData.occupation);
+    setProfilePic(profileData.avatar);
+  }, [profileData]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        setUser(firebaseUser);
+        fetchUserProfile(firebaseUser.uid);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return unsubscribe; 
+  }, [auth]);
+
+  function fetchUserProfile(uid) {
+    const db = getDatabase(app);
+    const userRef = ref(db, `users/${uid}`);
+    
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setName(data.name);
+        setEmail(data.email);
+        setPhone(data.phone);
+        setProfilePic(data.avatar);
+        setOccupation(data.occupation);
+      }
+    });
+  }
+
+  function saveUserProfile(uid, profileData) {
+    const db = getDatabase(app);
+    const userRef = ref(db, `users/${uid}`);
+    
+    update(userRef, profileData)
+      .then(() => {
+        console.log('Profil uppdaterad i Firebase');
+      })
+      .catch((error) => {
+        console.error('Ett fel inträffade vid uppdatering av profil i Firebase', error);
+      });
+  }
 
   const handleEdit = () => setIsEditing(true);
-  const handleSave = () => setIsEditing(false);
+
+  const handleSave = () => {
+    const newProfileData = {
+      name,
+      email,
+      phone,
+      profilePic,
+      occupation,
+    };
+
+    if (user) {
+      saveUserProfile(user.uid, newProfileData);
+      
+    }  
+    updateProfileData(newProfileData);
+    setIsEditing(false);
+  };
+
   const handleCancel = () => setIsEditing(false);
   
+
 
   return (
     <section className="vh-100">
@@ -29,7 +101,7 @@ export default function PersonalProfile() {
               <MDBRow className="g-0">
                 <MDBCol md="4" className="gradient-custom text-center text-white profile-col"
                   style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem' }}>
-  
+                    
                   {isEditing ? 
                     <ProfilePicture profilePic={profilePic} setProfilePic={setProfilePic} />
                     : <MDBCardImage src={profilePic} alt="Avatar" className="my-5" style={{ width: '80px' }} fluid />
@@ -37,7 +109,7 @@ export default function PersonalProfile() {
   
                   {!isEditing && (
                     <button className="edit-button" onClick={handleEdit} style={{ padding: '5px 10px', margin: '5px' }}>
-                      Redigera Profil
+                      Edit Profile
                     </button>
                   )}
                   
@@ -64,8 +136,8 @@ export default function PersonalProfile() {
                           <label>Phone number</label>
                           <MDBInput id='typePhone' type='tel' value={phone} onChange={(e) => setPhone(e.target.value)} />
                         </div>
-                        <button onClick={handleSave} style={{ margin: '10px', padding: '5px 20px' }}>Spara</button>
-                        <button onClick={handleCancel} style={{ margin: '10px', padding: '5px 20px' }}>Avbryt</button>
+                        <button onClick={handleSave} style={{ margin: '10px', padding: '5px 20px' }}>Save</button>
+                        <button onClick={handleCancel} style={{ margin: '10px', padding: '5px 20px' }}>Cancel</button>
                       </div>
                     ) : (
                       <MDBRow className="pt-1">

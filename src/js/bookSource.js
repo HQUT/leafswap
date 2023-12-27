@@ -8,7 +8,7 @@ const info = new URLSearchParams({
 const BookSource = {
   apiCall(endpoint) {
     const url = `${BASE_URL}/${endpoint}&${info}`; 
-    console.log("API Request URL:", url); // Använd info-strängen här
+    console.log("API Request URL:", url); 
     return fetch(url)
       .then(response => {
         if (response.ok) return response.json();
@@ -36,7 +36,6 @@ const BookSource = {
   },
 
   getBookDetails(id) {
-    //return this.apiCall(`volumes/${id}`);
     const url = `${BASE_URL}/volumes/${id}?${info}`;
     console.log(`API Request URL (GET):`, url);
     

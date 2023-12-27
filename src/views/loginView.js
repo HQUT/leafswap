@@ -7,7 +7,7 @@ export function LoginView(props) {
         
          {props.showResetPopup && (
           <div className="popup1">
-            <p>Ett e-postmeddelande för återställning av lösenordet har skickats.</p>
+            <p>A password reset email has been sent.</p>
 
           </div>
         )}
