@@ -40,13 +40,17 @@ Otherwise, users liked the idea of the application and found it useful. They tho
 
 ## Installation
 1. Clone the repository with Git:
+```javascript
 git clone [repository URL]
-
+```
 2. Navigatw to the project directory:
+```javascript
 cd [leafswap]
-
+```
 3. Install dependencies using: 
+```javascript
 npm install
+```
 
 ## Configuration
 This application interacts with external API wich is: https://developers.google.com/books/docs/v1/getting_started?csw=1
@@ -58,10 +62,10 @@ You have to obtain an API key from google Books
 Under the folder js, create a file and call inte apiConfig.js
 
 - In the Config file add the following line:
-
+```javascript
 export const API_KEY=your-external-api-key;
 export const BASE_URL = "https://www.googleapis.com/books/v1";
-
+```
 This applikation use firebase for the backend services. To configure Firebase:
 
 1. Create a firebase Project: 
@@ -70,6 +74,7 @@ Create a Firebase project at Firebase Console.
 2. Get Firebase Configuration: 
 n your Firebase project, navigate to the project settings, and find your Firebase configuration object, which should looks like this:
 
+```javascript
 const firebaseConfig = {
     apiKey: "your-api-key",
     authDomain: "your-project-auth-domain",
@@ -80,10 +85,11 @@ const firebaseConfig = {
     appId: "your-app-id",
     measurementId: "your-measurement-id"
 };
-
+```
 3. Create firebaseConfig file:
 Under the 'src' folder create a new file and call inte 'firebaseConfig.js' and add you firebase Configuration, which should look like this:
 
+```javascript 
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -94,33 +100,33 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export { app };
-
+```
 ## Running the Aplication
 
 To start the application in development mode, run:
-
+```javascript
 npm start
-
+```
 ## Deployment
 
 This application is configured to be deployed using Firebase Hosting, which provides fast and secure hosting for your web app. Follow these steps to deploy your application: 
 
 # Prerequisites
 - Ensure you have Firebase CLI installed. If not, install it globally via npm:
-
+```javascript
 npm install -g firebase-tools
-
+```
 - You should already have a Firebase project set up as described in the Configuration section.
 
 # Initial Setup
 1. gin to Firebase: Run the following command and follow the prompts to log in to Firebase:
-
+```javascript
 firebase login
-
+```
 2. Initialize Firebase in Your Project: In your project directory, run:
-
+```javascript
 firebase init
-
+```
 - Choose Hosting when prompted for which Firebase services you want to set up.
 - Select the Firebase project you created for this app.
 - Specify build as your public directory (this is where create-react-app builds your project).
@@ -129,14 +135,14 @@ firebase init
 
 # Building the Application
 Before deploying, you need to create a production build of your app. Use this command which compiles your application into static files in the 'build' folder:
-
+```javascript
 npm run build
-
+```
 # Deploying to Firebase Hosting
 After building your application, deploy it to Firebase Hosting using:
-
+```javascript
 firebase deploy
-
+```
 # Update and Redeploy
 Whenever you make changes to your app:
 
