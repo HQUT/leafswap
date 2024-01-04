@@ -72,7 +72,7 @@ This applikation use firebase for the backend services. To configure Firebase:
 Create a Firebase project at Firebase Console.
 
 2. Get Firebase Configuration: 
-n your Firebase project, navigate to the project settings, and find your Firebase configuration object, which should looks like this:
+In your Firebase project, navigate to the project settings, and find your Firebase configuration object, which should looks like this:
 
 ```javascript
 const firebaseConfig = {
@@ -87,7 +87,7 @@ const firebaseConfig = {
 };
 ```
 3. Create firebaseConfig file:
-Under the 'src' folder create a new file and call inte 'firebaseConfig.js' and add you firebase Configuration, which should look like this:
+Under the 'src' folder create a new file and call it 'firebaseConfig.js'. Add you firebase Configuration, which should look like this:
 
 ```javascript 
 import { initializeApp } from "firebase/app";
@@ -109,7 +109,7 @@ npm start
 ```
 ## Deployment
 
-This application is configured to be deployed using Firebase Hosting, which provides fast and secure hosting for your web app. Follow these steps to deploy your application: 
+This application is configured to be deployed using Firebase Hosting. Follow these steps to deploy your application: 
 
 # Prerequisites
 - Ensure you have Firebase CLI installed. If not, install it globally via npm:
