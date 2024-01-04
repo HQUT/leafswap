@@ -93,8 +93,9 @@ Under the 'src' folder create a new file and call it 'firebaseConfig.js'. Add yo
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    apiKey: "your-api-key",
+    authDomain: "your-project-auth-domain",
+    databaseURL: "your-database-url",
     // ...other keys
 };
 
