@@ -72,7 +72,6 @@ Otherwise, users liked the idea of the application and found it useful. They tho
 │   ├── index.js
 │   ├── logo.svg
 │   ├── reportWebVitals.jss
-│   ├── setupTests.js
 │   ├── slick-theme.css
 │   └── slick.css
 └── README.md
