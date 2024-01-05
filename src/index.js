@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Model } from './js/Model';
-import PersonalProfile from './js/komponenter/profile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const model = new Model();
