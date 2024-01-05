@@ -16,7 +16,7 @@ function App(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <ProfileProvider> 
+    <ProfileProvider model={props.model}> 
       <BrowserRouter>
         <div className="container-fluid">
           <div className="row">
@@ -26,7 +26,7 @@ function App(props) {
             <div className="col-md-9">
               <Routes>
                 <Route path="/home" element={<HomePresenter />} />
-                <Route path="/profile" element={<PersonalProfile />} />
+                <Route path="/profile" element={<PersonalProfile model ={props.model}/>} />
                 <Route path="/login" element={<LoginPresenter setIsLoggedIn={setIsLoggedIn} />} />
                 <Route path="/about" element={<About model={props.model} />} />
                 <Route path="/search" element={<SearchPresenter model={props.model} />} />

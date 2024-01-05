@@ -29,11 +29,16 @@ export function usePromise(promise) {
 }
 
 export function promiseNoData(promise, data, error) {
-  if (!promise && !error) {
+  if (!promise) {
     return null;
-  } else if (promise && !data && !error) {
-    return <img src="https://brfenergi.se/iprog/loading.gif" alt="Loading" />;
-  } else if (promise && !data && error) {
-    return <span>Error</span>;
+  } else if (error) {
+    return <span>Error</span>; 
+  } else if (promise && !data) {
+    return data === null ? (
+      <img src="https://brfenergi.se/iprog/loading.gif" alt="Loading" />
+    ) : (
+      <div>No books were found for your search.</div>  
+    );
   }
 }
+
