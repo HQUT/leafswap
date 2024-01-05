@@ -1,16 +1,22 @@
 import { BookSource } from "./bookSource";
 import { getAuth, onAuthStateChanged, setPersistence, browserSessionPersistence } from "firebase/auth";
-import { PersistUpdate, PersistModel } from "../firebaseModel";
-
+import { PersistUpdate, PersistModel,updateProfileData, fetchUserProfile} from "../firebaseModel";
+import { app } from "../firebaseConfig";
 
 export class Model {
-    constructor(user = null, books = [], id = null, observers = []) {
+    constructor(user = null, books = [], id = null) {
         this.observers = [];
-        this.collections = this.collections || {};
-        this.collections["Quick Add"] = this.collections["Quick Add"] || [];
+        this.collections = { "Quick Add": [] , ...this.collections };
         this.setCurrentBook(id);
         this.books = books;
         this.setUser(user);
+        this.profileData = {
+         name: '',
+         avatar: '',
+         email: '', 
+         phone: '',
+         occupation: 'Web Designer',
+     };
         this.savedState();
     }
 
@@ -20,6 +26,7 @@ export class Model {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     this.setUser(user);
+                    fetchUserProfile(user.uid, this.setProfileData.bind(this));
                     PersistModel(this);
                     
                 } else {
@@ -36,8 +43,22 @@ export class Model {
         PersistUpdate(this)
         this.notifyObservers();
     }
-    
 
+    setProfileData(data) {
+      this.profileData = data;
+      this.notifyObservers();
+  }
+    
+    saveUserProfile(profileData) {
+      const auth = getAuth(app);
+      if (auth.currentUser) {
+        updateProfileData(auth.currentUser.uid, profileData).then(() => {
+          console.log('Profil uppdaterad i Firebase');
+        }).catch((error) => {
+          console.error('Ett fel inträffade vid uppdatering av profil i Firebase', error);
+        });
+      }
+    }
 
 
     setUser(user) {
@@ -84,7 +105,7 @@ export class Model {
         PersistUpdate(this);
         this.notifyObservers();
       } else {
-        throw new Error(`Collection already exists!`);
+        throw new Error(`Collection "${collectionName}" already exists!`);
       }
    }
 

@@ -32,3 +32,20 @@ export function PersistUpdate(model) {
     console.error(error); 
   });
   }
+
+  export function fetchUserProfile(uid, setProfileData) {
+    const db = getDatabase(app);
+    const userRef = ref(db, `users/${uid}`);
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setProfileData(data);
+      }
+    });
+  }
+  
+  export function updateProfileData(uid, userData) {
+    const db = getDatabase(app);
+    const userRef = ref(db, `users/${uid}`);
+    return update(userRef, userData);
+  }

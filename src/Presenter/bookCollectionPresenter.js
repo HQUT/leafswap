@@ -12,6 +12,11 @@ export function BookCollectionPresenter(props) {
   const [deletedCollectionName, setDeletedCollectionName] = useState('');
   const [deltedbookPopup, setDeltedBookPopup] = useState(false);
 
+  useEffect(() => {
+    if (!collections['Quick Add']) {
+      props.model.createCollection('Quick Add');
+    }
+  }, [collections, props.model]);
 
   const booksInSelectedCollection = useMemo(() => {
     return selectedCollection ? collections[selectedCollection] : [];

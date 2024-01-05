@@ -35,6 +35,14 @@ const BookSource = {
     return this.apiCall(`volumes?q=subject:${formattedCategory}${formattedParams ? `+${formattedParams}` : ''}`);
   },
 
+  searchBookByName(bookName) {
+    if (!bookName) {
+      throw new Error('Book name is required for the search');
+    }
+    const formattedBookName = encodeURIComponent(bookName);
+    return this.apiCall(`volumes?q=intitle:${formattedBookName}`);
+  },
+
   getBookDetails(id) {
     const url = `${BASE_URL}/volumes/${id}?${info}`;
     console.log(`API Request URL (GET):`, url);

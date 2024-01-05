@@ -3,7 +3,6 @@ import { usePromise, promiseNoData } from "../js/Promise.js";
 import { SearchFormView, SearchResultsView } from "../views/searchView.js";
 import { BookSource } from "../js/bookSource.js";
 
-
 export function SearchPresenter(props) {
   const [myPromise, setPromise] = useState(null);
   const [query, setQuery] = useState("");
@@ -24,28 +23,34 @@ const doSearch = () => {
   setPromise(BookSource.searchBookByCategory(searchQuery, popularCategory));
 };
 
-  
 
-  const searchBook = () => {
-    if (query && category)
+const searchBook = () => {
+  if (query) {
+    if (category) {
       setPromise(BookSource.searchBookByCategory(query, category));
-    else return;
-  };
+    } else {
+      setPromise(BookSource.searchBookByName(query));
+    }
+  } else {
+    return;
+  }
+};
 
-  return (
-    <div>
-      <SearchFormView
-        options={categories}
-        onText={(text) => setQuery(text)}
-        onCategor={(categories) => setCategory(categories)}
-        onSearch={searchBook}
+return (
+  <div>
+    <SearchFormView
+      options={categories}
+      onText={(text) => setQuery(text)}
+      onCategor={(categories) => setCategory(categories)}
+      onSearch={searchBook}
+    />
+
+    {promiseNoData(myPromise, myData, myError) || (
+      <SearchResultsView
+        searchResults={myData}
+        bookChosen={(id) => props.model?.setCurrentBook(id)}
       />
-      {promiseNoData(myPromise, myData, myError) || (
-        <SearchResultsView
-          searchResults={myData}
-          bookChosen={(id) => props.model?.setCurrentBook(id)}
-        />
-      )}
-    </div>
-  );
-}
+    )}
+  </div>
+);
+    }

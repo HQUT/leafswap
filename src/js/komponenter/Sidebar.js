@@ -13,7 +13,7 @@ import {
 import '../../App.css';
 import { useProfile } from './ProfileContext';
 
-function SidebarComp({ isLoggedIn, setIsLoggedIn }) {
+function SidebarComp({ isLoggedIn, setIsLoggedIn}) {
 
   const {profileData} = useProfile();
 
@@ -69,7 +69,7 @@ function SidebarComp({ isLoggedIn, setIsLoggedIn }) {
     <div className="profileprovider-info">
       <img
         className="profileprovider-img"
-        src={profileData.profilePic} 
+        src={profileData.avatar} 
         alt="Profile"
       />
       <span className="profileprovider-name">{profileData.name}</span>
