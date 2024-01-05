@@ -29,6 +29,7 @@ User Feedback:
 - The collection should not be visible in the sidebar if the user is not logged in.
 - Add a background detail in the book description to make it easier to read, otherwise the page's background and text color can make it difficult.
 - Add a slogan that briefly describes the purpose of the application.
+- Add functionality so that one can search for a book by name only, or with both name and category.
 
 This was the feedback we received from some users. We have tried to update the application to meet these requirements.
 
